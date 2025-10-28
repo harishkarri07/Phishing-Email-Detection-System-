@@ -8,6 +8,22 @@ from flask import Flask, render_template_string, request, jsonify
 import re
 
 app = Flask(__name__)
+import os
+from flask import Flask
+# ... other imports
+
+# ... (Model Loading code)
+
+app = Flask(__name__)
+
+# --- ADD THESE LINES HERE ---
+# 1. Read the secret key from the environment (crucial for security)
+app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY', 'your-insecure-fallback-for-local-testing')
+
+# 2. Set the environment flag to production (crucial for security)
+os.environ['FLASK_ENV'] = 'production'
+
+# ... (Your routes and prediction logic continue below)
 
 def phishing_detector(email_text):
     """
